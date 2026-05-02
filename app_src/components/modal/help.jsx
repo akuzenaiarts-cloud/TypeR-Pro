@@ -17,7 +17,7 @@ const HelpModal = React.memo(function HelpModal() {
                 <div className="app-modal-title">
                     {locale.helpTitle}
                 </div>
-                <button className="topcoat-icon-button--large--quiet" title={locale.close} onClick={close}>
+                <button className="btn btn--icon btn--ghost" title={locale.close} onClick={close}>
                     <FiX size={18} />
                 </button>
             </div>
