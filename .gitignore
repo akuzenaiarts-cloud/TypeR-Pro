@@ -1,8 +1,8 @@
 .vscode
 node_modules
 storage
-TypeR*.zip
-TypeR-*.zxp
+TypeR-pro*.zip
+TypeR-pro*.zxp
 .DS_Store
 install_mac.sh
 docs*
