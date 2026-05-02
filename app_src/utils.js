@@ -1,12 +1,12 @@
 import "./lib/CSInterface";
 
-const csInterface = new window.CSInterface();
-const path = csInterface.getSystemPath(window.SystemPath.EXTENSION);
+const csInterface = window.__adobe_cep__ ? new window.CSInterface() : null;
+const path = csInterface ? csInterface?.getSystemPath(window.SystemPath.EXTENSION) : "";
 const storagePath = path + "/storage";
 
 let locale = {};
 
-const openUrl = window.cep.util.openURLInDefaultBrowser;
+const openUrl = (window.cep && window.cep.util) ? window.cep.util.openURLInDefaultBrowser : function() {};
 
 const checkUpdate = async (currentVersion) => {
   try {
@@ -81,7 +81,7 @@ const checkUpdate = async (currentVersion) => {
 };
 
 const getOSType = () => {
-  const os = csInterface.getOSInformation();
+  const os = csInterface?.getOSInformation();
   if (os && os.toLowerCase().indexOf('mac') !== -1) {
     return 'mac';
   }
@@ -94,8 +94,8 @@ const downloadAndInstallUpdate = async (downloadUrl, onProgress, onComplete, onE
     
     // Get user's Downloads folder
     const userHome = osType === 'win' 
-      ? csInterface.getSystemPath(window.SystemPath.USER_DATA).split('/AppData/')[0]
-      : csInterface.getSystemPath(window.SystemPath.USER_DATA).replace('/Library/Application Support', '');
+      ? csInterface?.getSystemPath(window.SystemPath.USER_DATA).split('/AppData/')[0]
+      : csInterface?.getSystemPath(window.SystemPath.USER_DATA).replace('/Library/Application Support', '');
     
     const downloadsPath = osType === 'win'
       ? `${userHome}/Downloads/TypeR_Update`
@@ -106,7 +106,7 @@ const downloadAndInstallUpdate = async (downloadUrl, onProgress, onComplete, onE
     onProgress && onProgress(locale.updateDownloading || 'Downloading update...');
     
     // Clean and create download directory
-    csInterface.evalScript(`deleteFolder("${downloadsPath.replace(/\\/g, '\\\\').replace(/\//g, '\\\\')}")`, () => {
+    csInterface?.evalScript(`deleteFolder("${downloadsPath.replace(/\\/g, '\\\\').replace(/\//g, '\\\\')}")`, () => {
       // Use cep.fs to create directory
       const mkdirResult = window.cep.fs.makedir(downloadsPath);
       if (mkdirResult.err && mkdirResult.err !== 0 && mkdirResult.err !== 17) { // 17 = already exists
@@ -263,7 +263,7 @@ PowerShell -NoProfile -ExecutionPolicy Bypass -File "install_update.ps1"
           onProgress && onProgress(locale.updateReady || 'Update ready to install...');
           
           // Open the folder in Explorer
-          csInterface.evalScript(`openFolder("${downloadsPath.replace(/\\/g, '\\\\').replace(/\//g, '\\\\')}")`, () => {
+          csInterface?.evalScript(`openFolder("${downloadsPath.replace(/\\/g, '\\\\').replace(/\//g, '\\\\')}")`, () => {
             onComplete && onComplete(true); // true = needs manual step
           });
           
@@ -355,11 +355,11 @@ rm -rf "$SCRIPT_DIR"
           window.cep.fs.writeFile(shScriptPath, installScript);
           
           // Make executable
-          csInterface.evalScript(`makeExecutable("${shScriptPath}")`, () => {
+          csInterface?.evalScript(`makeExecutable("${shScriptPath}")`, () => {
             onProgress && onProgress(locale.updateReady || 'Update ready to install...');
             
             // Open the folder in Finder
-            csInterface.evalScript(`openFolder("${downloadsPath}")`, () => {
+            csInterface?.evalScript(`openFolder("${downloadsPath}")`, () => {
               onComplete && onComplete(true); // true = needs manual step
             });
           });
@@ -378,6 +378,7 @@ rm -rf "$SCRIPT_DIR"
 };
 
 const readStorage = (key) => {
+  if (!window.cep || !window.cep.fs) { return key ? void 0 : { data: {} }; }
   const result = window.cep.fs.readFile(storagePath);
   if (result.err) {
     return key
@@ -393,6 +394,7 @@ const readStorage = (key) => {
 };
 
 const writeToStorage = (data, rewrite) => {
+  if (!window.cep || !window.cep.fs) return false;
   const storage = readStorage();
   if (storage.error || rewrite) {
     const result = window.cep.fs.writeFile(storagePath, JSON.stringify(data));
@@ -405,6 +407,7 @@ const writeToStorage = (data, rewrite) => {
 };
 
 const deleteStorageFile = () => {
+  if (!window.cep || !window.cep.fs) return false;
   const result = window.cep.fs.deleteFile(storagePath);
   if (typeof result === "number") {
     return (
@@ -453,7 +456,7 @@ const parseLocaleFile = (str) => {
 };
 
 const initLocale = () => {
-  locale = csInterface.initResourceBundle();
+  locale = csInterface?.initResourceBundle() || {};
   const loadLocaleFile = (file) => {
     const result = window.cep.fs.readFile(file);
     if (!result.err) {
@@ -470,24 +473,24 @@ const initLocale = () => {
   }
 };
 
-initLocale();
+if (csInterface) { initLocale(); }
 
 const nativeAlert = (text, title, isError) => {
   const data = JSON.stringify({ text, title, isError });
-  csInterface.evalScript("nativeAlert(" + data + ")");
+  csInterface?.evalScript("nativeAlert(" + data + ")");
 };
 
 const nativeConfirm = (text, title, callback) => {
   const data = JSON.stringify({ text, title });
-  csInterface.evalScript("nativeConfirm(" + data + ")", (result) => callback(!!result));
+  csInterface?.evalScript("nativeConfirm(" + data + ")", (result) => callback(!!result));
 };
 
 let userFonts = null;
 const getUserFonts = () => {
   return Array.isArray(userFonts) ? userFonts.concat([]) : [];
 };
-if (!userFonts) {
-  csInterface.evalScript("getUserFonts()", (data) => {
+if (csInterface && !userFonts) {
+  csInterface?.evalScript("getUserFonts()", (data) => {
     const dataObj = JSON.parse(data || "{}");
     const fonts = dataObj.fonts || [];
     userFonts = fonts;
@@ -495,7 +498,7 @@ if (!userFonts) {
 }
 
 const getActiveLayerText = (callback) => {
-  csInterface.evalScript("getActiveLayerText()", (data) => {
+  csInterface?.evalScript("getActiveLayerText()", (data) => {
     const dataObj = JSON.parse(data || "{}");
     if (!data || !dataObj.textProps) nativeAlert(locale.errorNoTextLayer, locale.errorTitle, true);
     else callback(dataObj);
@@ -753,14 +756,14 @@ const setActiveLayerText = (text, style, direction, callback = () => {}) => {
     direction,
     richTextRuns: parsed.richTextRuns,
   });
-  csInterface.evalScript("setActiveLayerText(" + data + ")", (error) => {
+  csInterface?.evalScript("setActiveLayerText(" + data + ")", (error) => {
     if (error) nativeAlert(locale.errorNoTextLayer, locale.errorTitle, true);
     callback(!error);
   });
 };
 
 const getCurrentSelection = (callback = () => {}) => {
-  csInterface.evalScript("getCurrentSelection()", (result) => {
+  csInterface?.evalScript("getCurrentSelection()", (result) => {
     const data = JSON.parse(result || "{}");
     if (data.error) {
       callback(null);
@@ -776,15 +779,15 @@ const getSelectionBoundsHash = (selection) => {
 };
 
 const startSelectionMonitoring = () => {
-  csInterface.evalScript("startSelectionMonitoring()");
+  csInterface?.evalScript("startSelectionMonitoring()");
 };
 
 const stopSelectionMonitoring = () => {
-  csInterface.evalScript("stopSelectionMonitoring()");
+  csInterface?.evalScript("stopSelectionMonitoring()");
 };
 
 const getSelectionChanged = (callback = () => {}) => {
-  csInterface.evalScript("getSelectionChanged()", (result) => {
+  csInterface?.evalScript("getSelectionChanged()", (result) => {
     const data = JSON.parse(result || "{}");
     if (data.noChange) {
       callback(null);
@@ -822,7 +825,7 @@ const createTextLayerInSelection = (text, style, pointText, padding, direction, 
     direction,
     richTextRuns: parsed.richTextRuns,
   });
-  csInterface.evalScript("createTextLayerInSelection(" + data + ", " + !!pointText + ")", (error) => {
+  csInterface?.evalScript("createTextLayerInSelection(" + data + ", " + !!pointText + ")", (error) => {
     if (error === "smallSelection") nativeAlert(locale.errorSmallSelection, locale.errorTitle, true);
     else if (error) nativeAlert(locale.errorNoSelection, locale.errorTitle, true);
     callback(!error);
@@ -861,7 +864,7 @@ const createTextLayersInStoredSelections = (texts, styles, selections, pointText
     padding: padding || 0,
     direction,
   });
-  csInterface.evalScript("createTextLayersInStoredSelections(" + data + ", " + !!pointText + ")", (error) => {
+  csInterface?.evalScript("createTextLayersInStoredSelections(" + data + ", " + !!pointText + ")", (error) => {
     if (error === "smallSelection") nativeAlert(locale.errorSmallSelection, locale.errorTitle, true);
     else if (error === "noSelection") nativeAlert(locale.errorNoSelection, locale.errorTitle, true);
     else if (error === "invalidSelection") nativeAlert(locale.errorNoSelection, locale.errorTitle, true);
@@ -873,7 +876,7 @@ const createTextLayersInStoredSelections = (texts, styles, selections, pointText
 
 const alignTextLayerToSelection = (resizeTextBox = false, padding = 0) => {
   const data = JSON.stringify({ resizeTextBox: !!resizeTextBox, padding: padding || 0 });
-  csInterface.evalScript("alignTextLayerToSelection(" + data + ")", (error) => {
+  csInterface?.evalScript("alignTextLayerToSelection(" + data + ")", (error) => {
     if (error === "smallSelection") nativeAlert(locale.errorSmallSelection, locale.errorTitle, true);
     else if (error === "noSelection") nativeAlert(locale.errorNoSelection, locale.errorTitle, true);
     else if (error) nativeAlert(locale.errorNoTextLayer, locale.errorTitle, true);
@@ -881,14 +884,14 @@ const alignTextLayerToSelection = (resizeTextBox = false, padding = 0) => {
 };
 
 const changeActiveLayerTextSize = (val, callback = () => {}) => {
-  csInterface.evalScript("changeActiveLayerTextSize(" + val + ")", (error) => {
+  csInterface?.evalScript("changeActiveLayerTextSize(" + val + ")", (error) => {
     if (error) nativeAlert(locale.errorNoTextLayer, locale.errorTitle, true);
     callback(!error);
   });
 };
 
 const getHotkeyPressed = (callback) => {
-  csInterface.evalScript("getHotkeyPressed()", callback);
+  csInterface?.evalScript("getHotkeyPressed()", callback);
 };
 
 const resizeTextArea = () => {
@@ -1010,7 +1013,7 @@ const getDefaultStroke = () => {
 
 const openFile = (path, autoClose = false) => {
   const encodedPath = JSON.stringify(path);
-  csInterface.evalScript(
+  csInterface?.evalScript(
     "openFile(" + encodedPath + ", " + (autoClose ? "true" : "false") + ")"
   );
 };
