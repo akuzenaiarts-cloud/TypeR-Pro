@@ -192,7 +192,7 @@ const HotkeysListner = React.memo(function HotkeysListner() {
 
   React.useEffect(() => {
     const keyInterests = [{ keyCode: 27 }];
-    csInterface.registerKeyEventsInterest(JSON.stringify(keyInterests));
+    csInterface?.registerKeyEventsInterest(JSON.stringify(keyInterests));
   }, []);
 
   return <React.Fragment />;
