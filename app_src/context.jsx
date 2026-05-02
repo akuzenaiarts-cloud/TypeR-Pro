@@ -151,7 +151,7 @@ const initialState = {
   interpretMarkdown: storage.data?.interpretMarkdown === true,
   styleSizeStep: 0.1,
   ...storage.data,
-  theme: "default",
+  theme: (storage.data?.theme && config.themes[storage.data.theme]) ? storage.data.theme : "default",
   shortcut: { ...defaultShortcut, ...(storage.data?.shortcut || {}) },
 };
 
@@ -542,7 +542,7 @@ const reducer = (state, action) => {
   }
 
   case "setTheme": {
-    newState.theme = "default";
+    newState.theme = action.theme || "default";
     break;
   }
 
