@@ -50,8 +50,8 @@ const Shortcut = (props) => {
     <React.Fragment key={props.index}>
       <div className="field-mini-label">{locale[`shortcut_${props.index}`]}</div>
       <div className="field-input shortcut-field">
-        <input id={`shortcut_${props.index}`} defaultValue={props.value.join(" + ")} onKeyDown={changeShortCut} className="topcoat-textarea" />
-        <button type="button" className="topcoat-icon-button--large--quiet" title={locale.delete} onClick={clearShortcut}>
+        <input id={`shortcut_${props.index}`} defaultValue={props.value.join(" + ")} onKeyDown={changeShortCut} className="form-input" />
+        <button type="button" className="btn btn--icon btn--ghost" title={locale.delete} onClick={clearShortcut}>
           <FiX size={14} />
         </button>
       </div>
