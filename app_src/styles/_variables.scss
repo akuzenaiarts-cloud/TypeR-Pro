@@ -1,0 +1,83 @@
+:root {
+  --bg:           #1e1f22;
+  --bg-elevated:  #26282c;
+  --bg-hover:     #2e3035;
+  --bg-surface:   #2b2d31;
+  --bg-input:     #1a1b1e;
+  --bg-active:    #363840;
+
+  --border:       rgba(255, 255, 255, 0.10);
+  --border-muted: rgba(255, 255, 255, 0.06);
+
+  --text:         #e3e3e3;
+  --text-muted:   #8b8b8b;
+  --text-subtle:  #555;
+
+  --accent:          #4d9ef7;
+  --accent-hover:    #6aadff;
+  --accent-active:   #3a8de8;
+  --accent-bg:       rgba(77, 158, 247, 0.18);
+  --accent-bg-hover: rgba(77, 158, 247, 0.28);
+
+  --danger:       #ef4444;
+  --danger-hover: #f87171;
+  --danger-bg:    rgba(239, 68, 68, 0.15);
+
+  --success:      #22c55e;
+
+  --gutter-bg:    #1a1b1e;
+
+  --line-current-bg:      rgba(77, 158, 247, 0.20);
+  --line-current-border:  #4d9ef7;
+  --line-text-bg:         #252628;
+  --line-current-text-bg: rgba(77, 158, 247, 0.14);
+  --line-page-text-bg:    rgba(77, 247, 137, 0.25);
+
+  --font-ui:   'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', monospace;
+
+  --fs-xs:   10px;
+  --fs-sm:   11px;
+  --fs-md:   12px;
+  --fs-base: 13px;
+  --fs-lg:   14px;
+
+  --sp-0: 2px;
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+
+  --r-sm:   3px;
+  --r-md:   5px;
+  --r-lg:   8px;
+  --r-pill: 9999px;
+
+  --t: 0.15s ease;
+}
+
+.light-theme {
+  --bg:           #f0f1f3;
+  --bg-elevated:  #e8e9eb;
+  --bg-hover:     #e0e1e4;
+  --bg-surface:   #ebebed;
+  --bg-input:     #ffffff;
+  --bg-active:    #d8d9dc;
+
+  --border:       rgba(0, 0, 0, 0.12);
+  --border-muted: rgba(0, 0, 0, 0.07);
+
+  --text:         #1a1a1a;
+  --text-muted:   #666666;
+  --text-subtle:  #999999;
+
+  --accent-bg:       rgba(77, 158, 247, 0.12);
+  --accent-bg-hover: rgba(77, 158, 247, 0.22);
+
+  --gutter-bg:    #e0e2e5;
+
+  --line-current-bg:      rgba(77, 158, 247, 0.15);
+  --line-text-bg:         #ffffff;
+  --line-current-text-bg: rgba(77, 158, 247, 0.10);
+  --line-page-text-bg:    rgba(60, 200, 80, 0.18);
+}
