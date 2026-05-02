@@ -72,7 +72,7 @@ const UpdateModal = React.memo(function UpdateModal() {
         <div className="app-modal-header hostBrdBotContrast">
           <div className="app-modal-title">{locale.updateTitle}</div>
           <button 
-            className="topcoat-icon-button--large--quiet" 
+            className="btn btn--icon btn--ghost" 
             title={locale.close} 
             onClick={close}
           >
@@ -106,7 +106,7 @@ const UpdateModal = React.memo(function UpdateModal() {
           </div>
         </div>
         <div className="app-modal-footer hostBrdTopContrast">
-          <button className="topcoat-button--large--cta" onClick={close}>
+          <button className="btn btn--primary" onClick={close}>
             {locale.close}
           </button>
         </div>
@@ -119,7 +119,7 @@ const UpdateModal = React.memo(function UpdateModal() {
       <div className="app-modal-header hostBrdBotContrast">
         <div className="app-modal-title">{locale.updateTitle}</div>
         <button 
-          className="topcoat-icon-button--large--quiet" 
+          className="btn btn--icon btn--ghost" 
           title={locale.close} 
           onClick={close}
           disabled={isUpdating}
@@ -156,7 +156,7 @@ const UpdateModal = React.memo(function UpdateModal() {
       </div>
       <div className="app-modal-footer hostBrdTopContrast" style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
         <button 
-          className="topcoat-button--large" 
+          className="btn" 
           onClick={download}
           disabled={isUpdating}
           title={locale.updateDownloadManual || 'Open GitHub to download manually'}
@@ -165,7 +165,7 @@ const UpdateModal = React.memo(function UpdateModal() {
           {locale.updateDownload}
         </button>
         <button 
-          className="topcoat-button--large--cta" 
+          className="btn btn--primary" 
           onClick={autoUpdate}
           disabled={isUpdating || !downloadUrl}
           title={locale.updateAutoInstall || 'Download and install automatically'}
