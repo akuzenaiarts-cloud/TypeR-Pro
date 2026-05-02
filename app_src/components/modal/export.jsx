@@ -115,7 +115,7 @@ const ExportModal = React.memo(function ExportModal() {
     <React.Fragment>
       <div className="app-modal-header hostBrdBotContrast">
         <div className="app-modal-title">{locale.settingsExport}</div>
-        <button className="topcoat-icon-button--large--quiet" title={locale.close} onClick={close}>
+        <button className="btn btn--icon btn--ghost" title={locale.close} onClick={close}>
           <FiX size={18} />
         </button>
       </div>
@@ -125,25 +125,25 @@ const ExportModal = React.memo(function ExportModal() {
               <div className="export-select-all-container">
                 <button 
                   type="button" 
-                  className="topcoat-button--large" 
+                  className="btn" 
                   onClick={toggleSelectAll}
                 >
                   {allSelected ? locale.deselectAll : locale.selectAll}
                 </button>
               </div>
             {renderFolderNodes(folderTree, selected, toggleFolder)}
-            <label className="topcoat-checkbox export-settings-item">
+            <label className="form-checkbox export-settings-item">
               <input
                 type="checkbox"
                 checked={withSettings}
                 onChange={(e) => setWithSettings(e.target.checked)}
               />
-              <div className="topcoat-checkbox__checkmark"></div>
+              <div className="form-checkbox__mark"></div>
               <div className="export-settings-title">{locale.exportIncludeSettings}</div>
             </label>
           </div>
           <div className="fields hostBrdTopContrast">
-            <button type="submit" className="topcoat-button--large--cta">
+            <button type="submit" className="btn btn--primary">
               <MdSave size={18} /> {locale.save}
             </button>
           </div>
@@ -157,13 +157,13 @@ const renderFolderNodes = (nodes, selected, toggleFolder, depth = 0) => {
   if (!nodes || !nodes.length) return null;
   return nodes.map((folder) => (
     <React.Fragment key={folder.id}>
-      <label className={"topcoat-checkbox export-folder-item" + (depth ? " m-nested" : "")}> 
+      <label className={"form-checkbox export-folder-item" + (depth ? " m-nested" : "")}> 
         <input
           type="checkbox"
           checked={selected.includes(folder.id)}
           onChange={(e) => toggleFolder(folder.id, e.target.checked)}
         />
-        <div className="topcoat-checkbox__checkmark"></div>
+        <div className="form-checkbox__mark"></div>
         <div className="export-folder-title" style={{ paddingLeft: depth ? depth * 12 : 0 }}>{folder.name}</div>
       </label>
       {renderFolderNodes(folder.children || [], selected, toggleFolder, depth + 1)}
