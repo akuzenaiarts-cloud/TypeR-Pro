@@ -1,5 +1,5 @@
 .text-block {
-  background: #eee;
+  background: var(--bg-surface);
   position: relative;
   overflow-y: auto;
   display: flex;
@@ -14,7 +14,7 @@
   left: 0;
   top: 0;
   &:before {
-    background: #ccc;
+    background: var(--gutter-bg);
     position: absolute;
     display: block;
     height: 100%;
@@ -24,7 +24,7 @@
     top: 0;
   }
   &:after {
-    background: #ccc;
+    background: var(--gutter-bg);
     position: absolute;
     display: block;
     height: 100%;
@@ -38,13 +38,13 @@
   justify-content: space-between;
   position: relative;
   display: flex;
-  font-family: monospace;
+  font-family: var(--font-mono);
   line-height: 17px;
-  font-size: 14px;
-  color: #777;
+  font-size: 13px;
+  color: var(--text-muted);
   z-index: 1;
   & + &:before {
-    border-top: 1px dashed #a9a9a9;
+    border-top: 1px dashed var(--border-muted);
     position: absolute;
     display: block;
     content: "";
@@ -55,11 +55,11 @@
     top: 0;
   }
   &.m-current {
-    background: rgba(#608fbf, 0.6);
-    color: #000;
+    background: var(--line-current-bg);
+    color: var(--text);
     z-index: 2;
     &:before {
-      border-top: 2px solid #608fbf;
+      border-top: 2px solid var(--line-current-border);
       position: absolute;
       display: block;
       content: "";
@@ -69,7 +69,7 @@
       top: 0;
     }
     &:after {
-      border-bottom: 2px solid #608fbf;
+      border-bottom: 2px solid var(--line-current-border);
       position: absolute;
       display: block;
       content: "";
@@ -94,7 +94,7 @@
     cursor: pointer;
     top: -2px;
     &:hover {
-      color: #000;
+      color: var(--text);
     }
   }
   .text-line.m-current & > SVG {
@@ -105,29 +105,29 @@
   word-break: break-word;
   white-space: pre-wrap;
   padding: 0 5px 0 7px;
-  color: rgba(#fff, 0);
-  background: #fff;
+  color: rgba(255, 255, 255, 0);
+  background: var(--line-text-bg);
   flex-grow: 2;
   &[dir="rtl"] {
     padding: 0 7px 0 5px;
   }
   .text-line.m-current & {
-    background: #bed6ef;
+    background: var(--line-current-text-bg);
   }
   .text-line.m-empty & {
-    background: rgba(#fff, 0);
+    background: rgba(255, 255, 255, 0);
   }
   .text-line.m-page & {
-    background: #3cff00;
+    background: var(--line-page-text-bg);
   }
   .text-line-ignore-prefix {
-    background: rgba(#000, 0.1);
+    background: rgba(0, 0, 0, 0.12);
   }
   .text-line-style-prefix {
     opacity: 0.9;
   }
   .text-line-ignore-tag {
-    color: #c0392b;
+    color: var(--danger);
     font-weight: 600;
   }
 }
@@ -141,16 +141,16 @@
     cursor: pointer;
     top: -2px;
     &:hover {
-      color: #000;
+      color: var(--text);
     }
     .text-line.m-current &:hover {
-      color: #073357;
+      color: var(--accent-hover);
     }
   }
 }
 .text-area {
   box-sizing: border-box;
-  font-family: monospace;
+  font-family: var(--font-mono);
   word-break: break-word;
   white-space: pre-wrap;
   position: relative;
@@ -160,9 +160,9 @@
   margin-right: 20px;
   margin-left: 50px;
   line-height: 17px;
-  font-size: 14px;
-  color: rgba(#000, 0);
-  caret-color: #000;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0);
+  caret-color: var(--text);
   border: none;
   resize: none;
   width: 100%;
@@ -170,7 +170,7 @@
 }
 .text-area-overlay {
   box-sizing: border-box;
-  font-family: monospace;
+  font-family: var(--font-mono);
   word-break: break-word;
   white-space: pre-wrap;
   position: absolute;
@@ -178,8 +178,8 @@
   background: none;
   padding: 4px 6px;
   line-height: 17px;
-  font-size: 14px;
-  color: #000;
+  font-size: 13px;
+  color: var(--text);
   border: none;
   left: 50px;
   right: 20px;
@@ -192,7 +192,7 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  background: #ddd;
+  background: var(--bg-surface);
   pointer-events: none;
   z-index: 4;
   cursor: text;
@@ -202,6 +202,6 @@
   top: 0;
   & > DIV {
     font-size: 18px;
-    color: #777;
+    color: var(--text-muted);
   }
 }
