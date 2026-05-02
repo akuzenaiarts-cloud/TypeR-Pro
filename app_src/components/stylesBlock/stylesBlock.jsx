@@ -53,10 +53,10 @@ const StylesBlock = React.memo(function StylesBlock() {
         )}
       </div>
       <div className="style-add hostBrdTopContrast style-btn-list">
-        <button className="topcoat-button--large" onClick={() => context.dispatch({ type: "setModal", modal: "editFolder", data: { create: true } })}>
+        <button className="btn" onClick={() => context.dispatch({ type: "setModal", modal: "editFolder", data: { create: true } })}>
           <FiFolderPlus size={18} /> {locale.addFolder}
         </button>
-        <button className="topcoat-button--large" onClick={() => context.dispatch({ type: "setModal", modal: "editStyle", data: { create: true } })}>
+        <button className="btn" onClick={() => context.dispatch({ type: "setModal", modal: "editStyle", data: { create: true } })}>
           <FiPlus size={18} /> {locale.addStyle}
         </button>
       </div>
@@ -146,16 +146,16 @@ const FolderItem = React.memo(function FolderItem(props) {
         <div className="folder-actions">
           {props.data.id ? (
             <>
-              <button className="topcoat-icon-button--large--quiet" title={locale.addSubfolder || "Add subfolder"} onClick={addSubfolder}>
+              <button className="btn btn--icon btn--ghost" title={locale.addSubfolder || "Add subfolder"} onClick={addSubfolder}>
                 <FiFolderPlus size={14} />
               </button>
-              <button className="topcoat-icon-button--large--quiet" title={locale.exportFolder} onClick={exportFolder}>
+              <button className="btn btn--icon btn--ghost" title={locale.exportFolder} onClick={exportFolder}>
                 <CiExport size={14} />
               </button>
-              <button className="topcoat-icon-button--large--quiet" title={locale.editFolder} onClick={openFolder}>
+              <button className="btn btn--icon btn--ghost" title={locale.editFolder} onClick={openFolder}>
                 <MdEdit size={14} />
               </button>
-              <button className="topcoat-icon-button--large--quiet" title={locale.duplicateFolder} onClick={duplicateFolder}>
+              <button className="btn btn--icon btn--ghost" title={locale.duplicateFolder} onClick={duplicateFolder}>
                 <FiCopy size={14} />
               </button>
             </>
@@ -328,7 +328,7 @@ const StyleItem = React.memo(function StyleItem(props) {
             onMouseDown={stopQuickEvent}
             onClick={stopQuickEvent}
           >
-            <button className={"topcoat-icon-button--large--quiet" + (props.active ? " m-cta" : "")} title={locale.editStyle} onClick={openStyle}>
+            <button className={"btn btn--icon btn--ghost" + (props.active ? " m-cta" : "")} title={locale.editStyle} onClick={openStyle}>
               <MdEdit size={16} />
             </button>
             <div className="style-quick-size hostBrdContrast" title={locale.editStyleFontSize || "Font size"} onMouseDown={stopQuickEvent} onClick={stopQuickEvent}>
@@ -351,14 +351,14 @@ const StyleItem = React.memo(function StyleItem(props) {
             </div>
           </div>
         ) : (
-          <button className={"topcoat-icon-button--large--quiet" + (props.active ? " m-cta" : "")} title={locale.editStyle} onClick={openStyle}>
+          <button className={"btn btn--icon btn--ghost" + (props.active ? " m-cta" : "")} title={locale.editStyle} onClick={openStyle}>
             <MdEdit size={16} />
           </button>
         )}
-        <button className={"topcoat-icon-button--large--quiet" + (props.active ? " m-cta" : "")} title={locale.duplicateStyle} onClick={duplicateStyle}>
+        <button className={"btn btn--icon btn--ghost" + (props.active ? " m-cta" : "")} title={locale.duplicateStyle} onClick={duplicateStyle}>
           <FiCopy size={16} />
         </button>
-        <button className={"topcoat-icon-button--large--quiet" + (props.active ? " m-cta" : "")} title={locale.insertStyle} onClick={insertStyle}>
+        <button className={"btn btn--icon btn--ghost" + (props.active ? " m-cta" : "")} title={locale.insertStyle} onClick={insertStyle}>
           <FiArrowRightCircle size={16} />
         </button>
       </div>
