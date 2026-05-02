@@ -1,8 +1,5 @@
 import './CSInterface';
 
-import LightTheme from './topcoat/css/topcoat-desktop-light.min.css';
-import DarkTheme from './topcoat/css/topcoat-desktop-dark.min.css';
-
 
 function computeValue(value, delta) {
     var computedValue = !isNaN(delta) ? value + delta : value;
@@ -80,8 +77,6 @@ function updateThemeWithAppSkinInfo(appSkinInfo) {
     addRule(styleId, ".hostButton:active", "background-color: #" + darkBgdColor);
     addRule(styleId, ".hostButton", "border-color: #" + lightBgdColor);
     
-    var topcoatCSS = document.getElementById('topcoat');
-    topcoatCSS.href = isLight ? LightTheme : DarkTheme;
     if (isLight) {
         document.body.classList.remove('dark-theme');
         document.body.classList.add('light-theme');
@@ -96,6 +91,10 @@ function onAppThemeColorChanged() {
     updateThemeWithAppSkinInfo(skinInfo);
 }
 
-const csInterface = new window.CSInterface();
-updateThemeWithAppSkinInfo(csInterface.hostEnvironment.appSkinInfo);
-csInterface.addEventListener(window.CSInterface.THEME_COLOR_CHANGED_EVENT, onAppThemeColorChanged);
+if (window.CSInterface) {
+    const csInterface = new window.CSInterface();
+    if (csInterface && csInterface.hostEnvironment) {
+        updateThemeWithAppSkinInfo(csInterface.hostEnvironment.appSkinInfo);
+        csInterface.addEventListener(window.CSInterface.THEME_COLOR_CHANGED_EVENT, onAppThemeColorChanged);
+    }
+}
