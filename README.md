@@ -1,91 +1,88 @@
-# TypeR
+# TypeR-Pro
 
-TypeR is an updated version of TyperTools, a Photoshop extension designed for typesetters working with manga and comics script. It simplifies routine tasks of typeset such as placing text on an image, aligning text, and performing style management. This version includes several bug fixes and new features to improve your workflow.
+TypeR-Pro is an actively developed fork of TypeR (originally forked from TyperTools by Swirt), a Photoshop CEP extension designed for typesetters working with manga and comics scripts. It simplifies routine typesetting tasks such as placing text on images, aligning text layers, and managing text styles.
+
+> **GitHub Repository:** [github.com/akuzenaiarts-cloud/TypeR-Pro](https://github.com/akuzenaiarts-cloud/TypeR-Pro)
 
 ## Key Features
 
-- **Bug Fixes**: Multiple bugs from the original TyperTools have been fixed.
-- Added **stroke (outline)** support to styles.
-- **Stable Auto-Centering**: Text shape no longer changes when using auto-centering.
-- **Auto-centering** now works without manual selection by automatically detecting the bubble shape (like in Typesetterer).
-- **Customizable Shortcuts**: You can now modify keyboard shortcuts. (+ added some new keyboard shortcuts)  
-- **Automatic Page Detection**: Automatically detects pages when importing.  
-- **Automatic Page Switching**: Automatically switches pages for seamless workflow.  
-- **Resize TypeR**: Decreased size limit of the TypeR window so it can be much smaller.  
-- **Line Spacing Sync**: When increasing/decreasing text size with TypeR, line spacing adjusts accordingly.  
-- **Adaptive Size**: If no fixed text size is defined, the size of the selected layer will be used.  
-- **Line Break on Insert**: A line break is now automatically added when inserting text on the current layer.  
-- **Duplicate Style Folders**: You can now duplicate a style folder easily.  
-- **Export a Single Folder**: No need to export all parameters and font styles, just export/import one (or more) folder as needed to share it your team members.
-- **Tag priority**: Style with the same prefix matching is now prioritized based on the currently selected folder.
+- **Bug Fixes** — Multiple bugs from the original TyperTools have been fixed.
+- **Stroke (Outline) Support** — Stroke/outline support added to styles.
+- **Stable Auto-Centering** — Text shape no longer changes when using auto-centering. Works without manual selection by detecting the bubble shape automatically.
+- **Customizable Shortcuts** — Modify keyboard shortcuts, with several new shortcuts added.
+- **Automatic Page Detection** — Automatically detects pages when importing scripts.
+- **Automatic Page Switching** — Seamlessly switches pages during workflow.
+- **Smaller Minimum Window** — TypeR-Pro can be resized to a much smaller panel.
+- **Line Spacing Sync** — Line spacing adjusts automatically when changing text size.
+- **Adaptive Text Size** — Uses the selected layer's size when no fixed size is defined.
+- **Line Break on Insert** — A line break is automatically added when inserting text on the current layer.
+- **Duplicate Style Folders** — Easily duplicate entire style folders.
+- **Single Folder Export** — Export/import individual folders to share with teammates.
+- **Tag Priority** — Styles with the same prefix are prioritized based on the active folder.
 
-And many, many more...
+And many more improvements coming with active development.
 
 ## Requirements
 
-- Windows 8/macOS 10.9 or newer.
-- Adobe Photoshop CC 2015 or newer.
-  (There may be problems with some portable or lightweight builds)
+- Windows 8 / macOS 10.9 or newer.
+- Adobe Photoshop CC 2015 or newer. (Some portable or lightweight builds may have issues.)
 
-## Installation Guide
-# If you download from the release :
-1. Download the [latest release](https://github.com/ScanR/TypeR/releases/latest/download/TypeR.zip)
-2. Extract the archive and execute the installation script for your operating system.
+## Installation
 
-   For macOS:
-   ```sh
-   chmod +x install_mac.sh
-   ./install_mac.sh
-   ```
+### From a Release (recommended)
 
-   For Windows:
-   ```sh
+1. Download the [latest release](https://github.com/akuzenaiarts-cloud/TypeR-Pro/releases/latest) and extract the zip.
+2. Run the install script for your OS:
+
+   **Windows:**
+   ```bat
    install_win.cmd
    ```
 
-# If you download from the source code :
-### Prerequisites
-
-- Ensure you have Node.js installed on your system. You can download it from [Node.js official website](https://nodejs.org/).
-
-### Steps
-
-1. Clone the repository and navigate to the root directory in your terminal.
-
+   **macOS:**
    ```sh
-   git clone https://github.com/ScanR/TypeR.git
-   cd TypeR
+   chmod +x install_mac.sh && ./install_mac.sh
    ```
 
-2. Install the necessary dependencies.
+### From Source
 
-   ```sh
-   npm install
-   ```
+**Prerequisites:** Node.js (v18+) — [nodejs.org](https://nodejs.org)
 
-3. Build the project using npm. 
+```sh
+git clone https://github.com/akuzenaiarts-cloud/TypeR-Pro.git
+cd TypeR-Pro
+npm install
+npm run build
+```
 
+Then run the install script for your OS (see above).
 
-   ```sh
-   npm run build
-   ```
+## Automated Releases (GitHub Actions)
 
-4. Execute the installation script for your operating system.
+Pushing a version tag automatically builds and publishes a Windows `.zip` release:
 
-   For macOS:
-   ```sh
-   chmod +x install_mac.sh
-   ./install_mac.sh
-   ```
+```sh
+git tag v2.6.0
+git push origin v2.6.0
+```
 
-   For Windows:
-   ```sh
-   install_win.cmd
-   ```
+The GitHub Actions workflow (`.github/workflows/release.yml`) handles:
+- Running `npm install` and `npm run build`
+- Packaging `app/`, `CSXS/`, `icons/`, `locale/`, `themes/`, and install scripts into a zip
+- Publishing the zip as a GitHub Release asset
+
+> **Note:** To enable the GitHub Actions workflow, add `.github/workflows/release.yml` to your repository via the GitHub web editor or by pushing with a token that has the `workflow` scope.
+
 ## Usage
 
-After installation, you can access TypeR within Adobe Photoshop Extensions tab. 
+After installation, open Photoshop and navigate to **Window → Extensions → TypeR**.
 
 ## Contributing
 
-If you encounter any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
+If you encounter any issues or have suggestions for improvements, feel free to open an issue or submit a pull request on [GitHub](https://github.com/akuzenaiarts-cloud/TypeR-Pro).
+
+## Credits
+
+- Original **TyperTools** by [Swirt](https://github.com/Swirt)
+- **TypeR** fork by [ScanR](https://github.com/ScanR) / ImSakushi
+- **TypeR-Pro** — active development fork with UI redesign and new features
