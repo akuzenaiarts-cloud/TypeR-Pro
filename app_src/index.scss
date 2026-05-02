@@ -1,54 +1,6 @@
-.topcoat-button--large,
-.topcoat-icon-button--large,
-.topcoat-button--large--cta,
-.topcoat-icon-button--large--cta,
-.topcoat-button--large--quiet,
-.topcoat-icon-button--large--quiet {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-.topcoat-button--large--cta,
-.topcoat-icon-button--large--cta {
-  &.m-danger {
-    border-color: #690000;
-    background: #af2121;
-  }
-  &.m-danger:hover {
-    background: #d82424;
-  }
-  &.m-danger:active {
-    background: #9a0000;
-  }
-}
-.topcoat-button--large--quiet,
-.topcoat-icon-button--large--quiet {
-  &.m-cta {
-    color: #fff;
-  }
-  &.m-cta:hover {
-    box-shadow: inset 0 1px rgba(#fff, 0.36);
-    border-color: #134f7f;
-    background: #4ca1e4;
-  }
-  &.m-cta:active {
-    box-shadow: inset 0 1px rgba(#000, 0.12);
-    border-color: #134f7f;
-    background: #1e7dc8;
-  }
-}
-.topcoat-button--large,
-.topcoat-button--large--cta,
-.topcoat-button--large--quiet {
-  & > SVG {
-    margin-right: 4px;
-  }
-}
-.topcoat-textarea {
-  font-size: 0.875rem;
-  line-height: 1.1rem;
-  padding: 4px 10px;
-}
+@use 'styles/variables';
+@use 'styles/reset';
+@use 'styles/components';
 
 .sketch-picker {
   INPUT + SPAN {
@@ -82,11 +34,11 @@
 }
 .field-label {
   margin-bottom: 5px;
-  font-size: 14px;
+  font-size: var(--fs-lg);
 }
 .field-mini-label {
   margin-bottom: 5px;
-  font-size: 10px;
+  font-size: var(--fs-xs);
 }
 .field-input {
   INPUT {
@@ -106,7 +58,7 @@
 .field-descr {
   font-style: italic;
   margin-top: 4px;
-  font-size: 12px;
+  font-size: var(--fs-md);
   opacity: 0.7;
 }
 
