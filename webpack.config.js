@@ -6,6 +6,8 @@ const postcssPresetEnv = require('postcss-preset-env');
 const autoprefixer = require('autoprefixer');
 const postcssCssnano = require('cssnano');
 const UglifyJS = require('uglify-js');
+const webpack = require('webpack');
+const { version } = require('./package.json');
 
 
 const hostFiles = [
@@ -107,6 +109,14 @@ const devConfig = {
 
 const prodConfig = {
     mode: 'production',
+    optimization: {
+        minimizer: [
+            new (require('terser-webpack-plugin'))({
+                terserOptions: { format: { comments: /^!/ } },
+                extractComments: false,
+            }),
+        ],
+    },
     module: {
         rules: [
             {
@@ -180,6 +190,11 @@ const prodConfig = {
                     return res.code.replace(/([{};:,])\s*\n+\s*/gi, '$1').replace(/\s*\n+\s*([})\];:,])/gi, '$1');
                 }
             }
+        }),
+        new webpack.BannerPlugin({
+            banner: `/*! TypeR Pro v${version} | Open-source Photoshop CEP extension for manga/comics typesetting | https://github.com/ScanR/TypeR | MIT License */`,
+            raw: true,
+            entryOnly: true,
         })
     ]
 };
