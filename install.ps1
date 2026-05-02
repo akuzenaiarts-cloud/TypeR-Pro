@@ -1,3 +1,16 @@
+# =============================================================================
+# TypeR Pro - Photoshop CEP Extension Installer
+# Open-source manga/comics typesetting extension for Adobe Photoshop
+# Source: https://github.com/ScanR/TypeR
+# License: MIT
+#
+# What this script does:
+#   1. Copies the extension files to your Adobe CEP extensions folder
+#   2. Sets PlayerDebugMode in your user registry (HKCU) so Photoshop
+#      can load unsigned extensions -- this is a standard requirement
+#      for all unsigned CEP extensions and affects only the current user.
+# =============================================================================
+
 # Encodage pour les accents dans la console
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 [Console]::InputEncoding  = [System.Text.Encoding]::UTF8
@@ -88,10 +101,10 @@ Read-Host -Prompt "? $msg_pause"
 
 # --- 6. Gestion des dossiers ---
 $AppData = $env:APPDATA
-$TargetDir = Join-Path $AppData "Adobe\CEP\extensions\typertools"
+$TargetDir = Join-Path $AppData "Adobe\CEP\extensions\typertools-pro"
 
 # On cree un dossier TEMP pour contenir la sauvegarde (et non le fichier lui-meme)
-$TempBackupContainer = Join-Path $env:TEMP "typer_backup_container"
+$TempBackupContainer = Join-Path $env:TEMP "typer_pro_backup_container"
 
 # Nettoyage prealable du temp au cas où
 if (Test-Path $TempBackupContainer) { Remove-Item $TempBackupContainer -Recurse -Force -ErrorAction SilentlyContinue }
