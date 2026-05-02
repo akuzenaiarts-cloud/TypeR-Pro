@@ -156,7 +156,7 @@ const EditFolderModal = React.memo(function EditFolderModal() {
                 <div className="app-modal-title">
                     {currentData.create ? locale.createFolderTitle : locale.editFolderTitle}
                 </div>
-                <button className="topcoat-icon-button--large--quiet" title={locale.close} onClick={close}>
+                <button className="btn btn--icon btn--ghost" title={locale.close} onClick={close}>
                     <FiX size={18} />
                 </button>
             </div>
@@ -173,7 +173,7 @@ const EditFolderModal = React.memo(function EditFolderModal() {
                                     ref={nameInputRef} 
                                     value={name} 
                                     onChange={changeFolderName} 
-                                    className="topcoat-text-input--large"
+                                    className="form-input"
                                 />
                             </div>
                         </div>
@@ -185,7 +185,7 @@ const EditFolderModal = React.memo(function EditFolderModal() {
                                 <select
                                     value={parentId || ''}
                                     onChange={e => { setParentId(e.target.value); setEdited(true); }}
-                                    className="topcoat-textarea"
+                                    className="form-input"
                                 >
                                     <option value="">{locale.editFolderParentRoot || locale.noFolderTitle}</option>
                                     {parentOptions.map(folder => (
@@ -241,15 +241,15 @@ const EditFolderModal = React.memo(function EditFolderModal() {
                         </div>
                     </div>
                     <div className="fields folder-edit-actions hostBrdTopContrast">
-                        <button type="submit" className={'folder-edit-save ' + (edited ? 'topcoat-button--large--cta' : 'topcoat-button--large')}>
+                        <button type="submit" className={'folder-edit-save ' + (edited ? 'btn btn--primary' : 'btn')}>
                             <MdSave size={18} /> {locale.save}
                         </button>
                         {currentData.create ? (
-                            <button type="button" className="topcoat-button--large--quiet" onClick={close}>
+                            <button type="button" className="btn btn--ghost" onClick={close}>
                                 <MdCancel size={18} /> {locale.cancel}
                             </button>
                         ) : (
-                            <button type="button" className="topcoat-button--large--quiet" onClick={deleteFolder}>
+                            <button type="button" className="btn btn--ghost" onClick={deleteFolder}>
                                 <MdDelete size={18} /> {locale.delete}
                             </button>
                         )}
@@ -265,14 +265,14 @@ const FolderStylesList = React.memo(function FolderStylesList(props) {
     return (
         <React.Fragment>
             {props.styles.map(style => (
-                <label key={style.id} className={'folder-style-item topcoat-checkbox hostBgdLight' + (props.selected.includes(style.id) ? ' m-selected' : '')}>
+                <label key={style.id} className={'folder-style-item form-checkbox hostBgdLight' + (props.selected.includes(style.id) ? ' m-selected' : '')}>
                     <div className="folder-style-cbx">
                         <input 
                             type="checkbox" 
                             checked={props.selected.includes(style.id)}
                             onChange={e => props.toggleStyle(style.id, e.target.checked)}
                         />
-                        <div className="topcoat-checkbox__checkmark"></div>
+                        <div className="form-checkbox__mark"></div>
                     </div>
                     <div className="folder-style-title">{style.name} <span>({props.label})</span></div>
                 </label>
