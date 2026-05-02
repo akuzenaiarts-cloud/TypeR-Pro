@@ -545,7 +545,7 @@ const SettingsModal = React.memo(function SettingsModal() {
             <div className="field">
               <div className="field-label">{locale.settingsTextItemKindLabel}</div>
               <div className="field-input">
-                <select value={pastePointText} onChange={changePastePointText} className="topcoat-textarea">
+                <select value={pastePointText} onChange={changePastePointText} className="form-input">
                   <option value="">{locale.settingsTextItemKindBox}</option>
                   <option value="1">{locale.settingsTextItemKindPoint}</option>
                 </select>
@@ -554,21 +554,21 @@ const SettingsModal = React.memo(function SettingsModal() {
             <div className="field">
               <div className="field-label">{locale.settingsLinePrefixesLabel}</div>
               <div className="field-input">
-                <textarea rows={2} value={ignoreLinePrefixes} onChange={changeLinePrefixes} className="topcoat-textarea" />
+                <textarea rows={2} value={ignoreLinePrefixes} onChange={changeLinePrefixes} className="form-input" />
               </div>
               <div className="field-descr">{locale.settingsLinePrefixesDescr}</div>
             </div>
             <div className="field">
               <div className="field-label">{locale.settingsIgnoreTagsLabel}</div>
               <div className="field-input">
-                <textarea rows={2} value={ignoreTags} onChange={changeIgnoreTags} className="topcoat-textarea" />
+                <textarea rows={2} value={ignoreTags} onChange={changeIgnoreTags} className="form-input" />
               </div>
               <div className="field-descr">{locale.settingsIgnoreTagsDescr}</div>
             </div>
             <div className="field">
               <div className="field-label">{locale.settingsDefaultStyleLabel}</div>
               <div className="field-input">
-                <select value={defaultStyleId} onChange={changeDefaultStyle} className="topcoat-textarea">
+                <select value={defaultStyleId} onChange={changeDefaultStyle} className="form-input">
                   <option key="none" value="">
                     {locale.settingsDefaultStyleNone}
                   </option>
@@ -590,7 +590,7 @@ const SettingsModal = React.memo(function SettingsModal() {
             <div className="field">
               <div className="field-label">{locale.settingsLanguageLabel}</div>
               <div className="field-input">
-                <select value={language} onChange={changeLanguage} className="topcoat-textarea">
+                <select value={language} onChange={changeLanguage} className="form-input">
                   {Object.entries(config.languages).map(([code, name]) => (
                     <option key={code} value={code}>
                       {code === "auto" ? locale.settingsLanguageAuto : name}
@@ -602,7 +602,7 @@ const SettingsModal = React.memo(function SettingsModal() {
             <div className="field">
               <div className="field-label">{locale.settingsThemeLabel}</div>
               <div className="field-input">
-                <select value={theme} onChange={changeTheme} className="topcoat-textarea" disabled>
+                <select value={theme} onChange={changeTheme} className="form-input">
                   {Object.keys(config.themes).map((code) => {
                     const key = 'settingsTheme' + code
                       .replace(/(^|-)(\w)/g, (m, p1, p2) => p2.toUpperCase());
@@ -614,12 +614,11 @@ const SettingsModal = React.memo(function SettingsModal() {
                   })}
                 </select>
               </div>
-              <div className="field-descr">{locale.settingsThemeDisabledDescr}</div>
             </div>
             <div className="field">
               <div className="field-label">{locale.settingsDirectionLabel}</div>
               <div className="field-input">
-                <select value={direction} onChange={changeDirection} className="topcoat-textarea">
+                <select value={direction} onChange={changeDirection} className="form-input">
                   <option value="ltr">{locale.settingsDirectionLtr}</option>
                   <option value="rtl">{locale.settingsDirectionRtl}</option>
                 </select>
@@ -628,9 +627,9 @@ const SettingsModal = React.memo(function SettingsModal() {
             <div className="field">
               <div className="field-label">{locale.settingsMiddleEastLabel}</div>
               <div className="field-input">
-                <label className="topcoat-checkbox">
+                <label className="form-checkbox">
                   <input type="checkbox" checked={middleEast} onChange={changeMiddleEast} />
-                  <div className="topcoat-checkbox__checkmark"></div>
+                  <div className="form-checkbox__mark"></div>
                 </label>
               </div>
             </div>
@@ -743,7 +742,7 @@ const SettingsModal = React.memo(function SettingsModal() {
                     value={styleSizeStep}
                     onChange={changeStyleSizeStep}
                     onBlur={resetStyleSizeStep}
-                    className="topcoat-text-input--large"
+                    className="form-input"
                   />
                 </div>
                 <div className="field-descr">
@@ -762,7 +761,7 @@ const SettingsModal = React.memo(function SettingsModal() {
                     max="100" 
                     value={internalPadding} 
                     onChange={changeInternalPadding} 
-                    className="topcoat-text-input--large" 
+                    className="form-input" 
                   />
                 </div>
                 <div className="field-descr">{locale.settingsInternalPaddingHint || "Espace interne pour éviter que le texte touche les bords de la bulle (0-100 pixels)"}</div>
@@ -806,7 +805,7 @@ const SettingsModal = React.memo(function SettingsModal() {
               ))}
             </div>
             <div className="field">
-              <button type="button" className="topcoat-button--large" onClick={resetShortcuts}>
+              <button type="button" className="btn" onClick={resetShortcuts}>
                 {locale.settingsResetShortcuts || "Reset shortcuts"}
               </button>
             </div>
@@ -827,7 +826,7 @@ const SettingsModal = React.memo(function SettingsModal() {
                 <div className="field-input">
                   <input
                     type="text"
-                    className="topcoat-text-input--large"
+                    className="form-input"
                     placeholder={locale.settingsStateNamePlaceholder}
                     value={stateName}
                     onChange={(e) => setStateName(e.target.value)}
@@ -836,7 +835,7 @@ const SettingsModal = React.memo(function SettingsModal() {
                 <div className="field-descr">{locale.settingsStatesDescr}</div>
               </div>
               <div className="field">
-                <button className="topcoat-button--large" onClick={saveCurrentState}>
+                <button className="btn" onClick={saveCurrentState}>
                   {locale.settingsSaveCurrentState}
                 </button>
               </div>
@@ -845,7 +844,7 @@ const SettingsModal = React.memo(function SettingsModal() {
                 <div className="field-input">
                   {Object.keys(savedStates).length ? (
                     <select
-                      className="topcoat-textarea"
+                      className="form-input"
                       value={selectedState}
                       onChange={(e) => setSelectedState(e.target.value)}
                     >
@@ -862,12 +861,12 @@ const SettingsModal = React.memo(function SettingsModal() {
                 </div>
               </div>
               <div className="field">
-                <button className="topcoat-button--large" onClick={loadSelectedState}>
+                <button className="btn" onClick={loadSelectedState}>
                   {locale.settingsLoadSelectedState}
                 </button>
               </div>
               <div className="field">
-                <button className="topcoat-button--large" onClick={toggleDeleteStates}>
+                <button className="btn" onClick={toggleDeleteStates}>
                   {locale.settingsDeleteStates}
                 </button>
               </div>
@@ -878,13 +877,13 @@ const SettingsModal = React.memo(function SettingsModal() {
                     {Object.keys(savedStates).length ? (
                       <div className="hostBrdContrast" style={{ maxHeight: 180, overflowY: "auto", padding: 6 }}>
                         {Object.keys(savedStates).map((name) => (
-                          <label key={name} className="topcoat-checkbox" style={{ display: "flex", alignItems: "center", marginBottom: 6 }}>
+                          <label key={name} className="form-checkbox" style={{ display: "flex", alignItems: "center", marginBottom: 6 }}>
                             <input
                               type="checkbox"
                               checked={!!statesToDelete[name]}
                               onChange={(e) => toggleStateCheckbox(name, e.target.checked)}
                             />
-                            <div className="topcoat-checkbox__checkmark" style={{ marginRight: 8 }}></div>
+                            <div className="form-checkbox__mark" style={{ marginRight: 8 }}></div>
                             <span>{name}</span>
                           </label>
                         ))}
@@ -894,10 +893,10 @@ const SettingsModal = React.memo(function SettingsModal() {
                     )}
                   </div>
                   <div className="field-input" style={{ marginTop: 8, display: "flex", gap: 8 }}>
-                    <button className="topcoat-button--large--cta" onClick={deleteSelectedStates}>
+                    <button className="btn btn--primary" onClick={deleteSelectedStates}>
                       {locale.settingsDeleteSelected}
                     </button>
-                    <button className="topcoat-button--large" onClick={toggleDeleteStates}>
+                    <button className="btn" onClick={toggleDeleteStates}>
                       {locale.cancel}
                     </button>
                   </div>
@@ -907,22 +906,22 @@ const SettingsModal = React.memo(function SettingsModal() {
             <div className="settings-group">
               <div className="settings-group-title">{locale.settingsGroupImportExport || "Import/Export"}</div>
               <div className="field">
-                <button className="topcoat-button--large" onClick={importSettings}>
+                <button className="btn" onClick={importSettings}>
                   <FaFileImport size={18} /> {locale.settingsImport}
                 </button>
               </div>
               <div className="field">
-                <button className="topcoat-button--large" onClick={exportSettings}>
+                <button className="btn" onClick={exportSettings}>
                   <FaFileExport size={18} /> {locale.settingsExport}
                 </button>
               </div>
               <div className="field">
-                <button className="topcoat-button--large" onClick={checkUpdatesNow}>
+                <button className="btn" onClick={checkUpdatesNow}>
                   {locale.settingsCheckUpdatesButton}
                 </button>
               </div>
               <div className="field">
-                <button className="topcoat-button--large--cta" onClick={resetStorage}>
+                <button className="btn btn--primary" onClick={resetStorage}>
                   {locale.settingsResetStorage || "Réinitialiser les réglages"}
                 </button>
               </div>
@@ -939,7 +938,7 @@ const SettingsModal = React.memo(function SettingsModal() {
     <React.Fragment>
       <div className="app-modal-header hostBrdBotContrast">
         <div className="app-modal-title">{locale.settingsTitle}</div>
-        <button className="topcoat-icon-button--large--quiet" title={locale.close} onClick={close}>
+        <button className="btn btn--icon btn--ghost" title={locale.close} onClick={close}>
           <FiX size={18} />
         </button>
       </div>
@@ -963,7 +962,7 @@ const SettingsModal = React.memo(function SettingsModal() {
           <form className="settings-content" onSubmit={save}>
             {renderTabContent()}
             <div className="settings-actions">
-              <button type="submit" className={edited ? "topcoat-button--large--cta" : "topcoat-button--large"}>
+              <button type="submit" className={edited ? "btn btn--primary" : "btn"}>
                 <MdSave size={18} /> {locale.save}
               </button>
             </div>
