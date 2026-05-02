@@ -351,7 +351,7 @@ const PreviewBlock = React.memo(function PreviewBlock() {
             <div className="preview-top_selection-info">
               <span className="preview-top_selection-count">{context.state.storedSelections.length} {context.state.storedSelections.length > 1 ? (locale.selectionsCount || 'selections') : (locale.selectionCount || 'selection')}</span>
               <button 
-                className="topcoat-icon-button--large" 
+                className="btn btn--icon" 
                 title={locale.clearSelections || "Clear selections"} 
                 onMouseDown={handleClearMouseDown}
                 onMouseUp={handleClearMouseUp}
@@ -382,28 +382,28 @@ const PreviewBlock = React.memo(function PreviewBlock() {
           </div>
         )}
         <div className="preview-top_main-controls">
-          <button className="preview-top_big-btn preview-top_big-btn--small topcoat-button--large--cta" title={
+          <button className="preview-top_big-btn preview-top_big-btn--small btn btn--primary" title={
             context.state.multiBubbleMode && context.state.storedSelections && context.state.storedSelections.length > 0 
               ? `Insérer ${context.state.storedSelections.length} texte${context.state.storedSelections.length > 1 ? 's' : ''}` 
               : locale.createLayerDescr
           } onClick={createLayer}>
             <AiOutlineBorderInner size={18} /> {locale.createLayer}
           </button>
-          <button className="preview-top_big-btn preview-top_big-btn--small topcoat-button--large" title={locale.alignLayerDescr} onClick={() => {
+          <button className="preview-top_big-btn preview-top_big-btn--small btn" title={locale.alignLayerDescr} onClick={() => {
             const padding = context.state.internalPadding || 0;
             alignTextLayerToSelection(context.state.resizeTextBoxOnCenter, padding);
           }}>
             <MdCenterFocusWeak size={18} /> {locale.alignLayer}
           </button>
           <div className="preview-top_change-size-cont">
-            <button className="topcoat-icon-button--large" title={locale.layerTextSizeMinus} onClick={() => changeActiveLayerTextSize(-(context.state.textSizeIncrement || 1))}>
+            <button className="btn btn--icon" title={locale.layerTextSizeMinus} onClick={() => changeActiveLayerTextSize(-(context.state.textSizeIncrement || 1))}>
               <FiMinusCircle size={18} />
             </button>
             <div className="preview-top_size-input">
-              <input min={1} max={99} type="number" value={context.state.textSizeIncrement || ""} onChange={handleIncrementChange} onBlur={handleIncrementBlur} className="topcoat-text-input" />
+              <input min={1} max={99} type="number" value={context.state.textSizeIncrement || ""} onChange={handleIncrementChange} onBlur={handleIncrementBlur} className="form-input" />
               <span>px</span>
             </div>
-            <button className="topcoat-icon-button--large" title={locale.layerTextSizePlus} onClick={() => changeActiveLayerTextSize(context.state.textSizeIncrement || 1)}>
+            <button className="btn btn--icon" title={locale.layerTextSizePlus} onClick={() => changeActiveLayerTextSize(context.state.textSizeIncrement || 1)}>
               <FiPlusCircle size={18} />
             </button>
           </div>
@@ -411,10 +411,10 @@ const PreviewBlock = React.memo(function PreviewBlock() {
       </div>
       <div className="preview-bottom">
         <div className="preview-nav">
-          <button className="topcoat-icon-button--large" title={locale.prevLine} onClick={() => context.dispatch({ type: "prevLine" })}>
+          <button className="btn btn--icon" title={locale.prevLine} onClick={() => context.dispatch({ type: "prevLine" })}>
             <FiArrowUp size={18} />
           </button>
-          <button className="topcoat-icon-button--large" title={locale.nextLine} onClick={() => context.dispatch({ type: "nextLine" })}>
+          <button className="btn btn--icon" title={locale.nextLine} onClick={() => context.dispatch({ type: "nextLine" })}>
             <FiArrowDown size={18} />
           </button>
         </div>
@@ -423,7 +423,7 @@ const PreviewBlock = React.memo(function PreviewBlock() {
             <div className="preview-line-info-text">
               {locale.previewLine}: <b>{line.index || "—"}</b>, {locale.previewStyle}: <b className="preview-line-style-name">{style.name || "—"}</b>, {locale.previewTextScale}:
               <div className="preview-line-scale">
-                <input min={1} max={999} type="number" placeholder="100" value={context.state.textScale || ""} onChange={(e) => setTextScale(e.target.value)} onFocus={focusScale} onBlur={blurScale} className="topcoat-text-input" />
+                <input min={1} max={999} type="number" placeholder="100" value={context.state.textScale || ""} onChange={(e) => setTextScale(e.target.value)} onFocus={focusScale} onBlur={blurScale} className="form-input" />
                 <span>%</span>
               </div>
             </div>
